@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="CSS Reset" href="reset.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="library.js" defer></script>
+    <title>Library</title>
+</head>
+<body>
+
+    <div class="container">
+
+
+        <header class="header">
+
+            <img src="img/book.png" alt="Book PNG">
+
+            <h1>Library</h1>
+            <img src="img/settings.svg" alt="Settings SVG">
+            <img src="img/reset.svg" alt="Refresh SVG">
+            <img src="img/github.svg" alt="Github SVG">
+
+        </header>
+
+
+        <main class="table-container">
+
+
+            <table class="books">
+
+                <thead>
+
+                    <tr class="column-headings">
+                       <th>Blank</th>
+                       <th>Title</th>
+                       <th>Author</th>
+                       <th>Pages</th>
+                       <th>Published</th>
+                       <th>Acquired</th>
+                       <th>Status</th>
+                       <th>Blank</th> 
+                    </tr>
+
+                </thead>
+
+                <tbody>
+
+                    <tr class="book-info">
+
+                        <td><input type="checkbox"></td>
+                        <td>The Book Of Not Knowing</td>
+                        <td>Peter Ralston</td>
+                        <td>601</td>
+                        <td>21/08/2010</td>
+                        <td>10/10/2020</td>
+                        <td>Read</td>
+                        <td><img src="img/delete.svg" alt="Delete SVG"><img src="img/edit.svg" alt="Edit SVG"></td>
+                    
+                    </tr>
+
+                    <tr class="book-info">
+
+                        <td><input type="checkbox"></td>
+                        <td>Fire & Blood</td>
+                        <td>George R.R Martin</td>
+                        <td>738</td>
+                        <td>20/11/2018</td>
+                        <td>18/10/2022</td>
+                        <td>Not Read</td>
+                        <td><img src="img/delete.svg" alt="Delete SVG"><img src="img/edit.svg" alt="Edit SVG"></td>
+                    
+                    </tr>
+                    
+                    <tr class="book-info">
+
+                        <td><input type="checkbox"></td>
+                        <td>The Genius Of Being</td>
+                        <td>Peter Ralston</td>
+                        <td>207</td>
+                        <td>28/02/2017</td>
+                        <td>24/12/2021</td>
+                        <td>Read</td>
+                        <td><img src="img/delete.svg" alt="Delete SVG"><img src="img/edit.svg" alt="Edit SVG"></td>
+
+                    </tr>
+
+                    <tr class="book-info">
+
+                        <td><input type="checkbox"></td>
+                        <td>The Rise Of The Dragon</td>
+                        <td>George R.R Martin</td>
+                        <td>350</td>
+                        <td>25/10/2022</td>
+                        <td>27/10/2022</td>
+                        <td>Not Read</td>
+                        <td><img src="img/delete.svg" alt="Delete SVG"><img src="img/edit.svg" alt="Edit SVG"></td>
+
+                    </tr>
+
+                    <tr class="book-info">
+
+                        <td><input type="checkbox"></td>
+                        <td>Spiritual Enlightenment: The Damndest Thing</td>
+                        <td>Jed McKenna</td>
+                        <td>326</td>
+                        <td>27/02/2010</td>
+                        <td>03/05/2019</td>
+                        <td>Read</td>
+                        <td><img src="img/delete.svg" alt="Delete SVG"><img src="img/edit.svg" alt="Edit SVG"></td>
+
+                    </tr>
+
+                    <tr class="book-info">
+
+                        <td><input type="checkbox"></td>
+                        <td>The Greatest Minds And Ideas Of All Time</td>
+                        <td>Will Durant</td>
+                        <td>149</td>
+                        <td>07/11/2002</td>
+                        <td>06/06/2018</td>
+                        <td>Read</td>
+                        <td><img src="img/delete.svg" alt="Delete SVG"><img src="img/edit.svg" alt="Edit SVG"></td>
+
+                    </tr>
+
+                    <tr class="book-info">
+
+                        <td><input type="checkbox"></td>
+                        <td>The Solandarian Game</td>
+                        <td>Martin Ball</td>
+                        <td>371</td>
+                        <td>24/02/2016</td>
+                        <td>03/12/2017</td>
+                        <td>Read</td>
+                        <td><img src="img/delete.svg" alt="Delete SVG"><img src="img/edit.svg" alt="Edit SVG"></td>
+
+                    </tr>
+
+                    <tr class="book-info">
+
+                        <td><input type="checkbox"></td>
+                        <td>Principles</td>
+                        <td>Ray Dalio</td>
+                        <td>593</td>
+                        <td>19/09/2017</td>
+                        <td>17/08/2022</td>
+                        <td>Not Read</td>
+                        <td><img src="img/delete.svg" alt="Delete SVG"><img src="img/edit.svg" alt="Edit SVG"></td>
+
+                    </tr>
+
+                </tbody>
+
+                    <tfoot>
+
+                        <img src="img/delete.svg" alt="Delete SVG">
+                        <img src="img/archive.svg" alt="Deleted Archive SVG">
+                        <img src="img/add.svg" alt="Add Item SVG"></img>
+
+                    </tfoot>
+
+            </table>
+
+        </main>
+
+
+        <section class="user-info">
+
+            <div>
+
+                <p>Total Books</p>
+
+                <output type="number" value="0" class="total-books">
+                    
+                </output>
+                
+            </div>
+
+            <div>
+
+                <p>Total Pages</p>
+
+                <output type="number" value="0" class="total-pages">
+
+                </output>
+            
+            </div>
+
+            <div>
+                
+                <p>Unique Authors</p>
+
+                <output type="number" value="0" class="unique-authors">
+
+                </output>
+
+            </div>
+
+            <div>
+
+                <p>Read Books</p>
+
+                <output type="number" value="0" class="read-books">
+
+                </output>
+
+            </div>
+
+            <div>
+
+                <p>Unread Books</p>
+
+                <output type="number" value="0" class="unread-books">
+
+                </output>
+
+            </div>
+
+            <div>
+
+                <p>Deleted Books</p>
+
+                <output type="number" value="0" class="deleted-books">
+
+                </output>
+
+            </div>
+
+        </section>
+
+        <footer class="footer">
+
+            <p>jkane  <i class="fa fa-github"></i> The Odin Project &copy; </p>
+        
+        </footer>
+
+    </div>
+
+</body>
+
+</html>
