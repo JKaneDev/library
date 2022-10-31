@@ -25,6 +25,10 @@ img {
     margin: 0;
 }
 
+.header div:nth-of-type(2) img, .books img {
+    transition: all 0.5s ease;
+}
+
 .books td img {
     height: 26px;
     width: 26px;
@@ -35,12 +39,18 @@ img {
     width: 32px;
 }
 
-.header, .table-container, .user-info, .footer {
-    background-color: var(--subsection-color);
+.header {
+    background-color: var(--alternate-color);
+    box-shadow: var(--alternate-color) 0px 5px 15px;
 }
 
-body { 
-    background-color: #262626;
+.header div:nth-of-type(2) img:hover {
+    transform: scale(1.5) rotate(-360deg);
+    cursor: pointer;
+}
+
+.table-container, .user-info, .footer {
+    background-color: var(--subsection-color);
 }
 
 .container {
@@ -52,7 +62,6 @@ body {
         "user user user"
         "foot foot foot";
     grid-template-columns: 3fr 1fr;
-    gap: .5em;
     height: 100vh;
 }
 
@@ -87,12 +96,14 @@ body {
 .table-container {
     grid-area: table;
     grid-column: 1 / -1;
-    padding: 1em;
+    padding: 2em; 
 }
 
-table {
+.books {
     width: 100%;
+    box-shadow: var(--alternate-color) 0px 7px 29px 0px;
 }
+
 
 caption {
     padding: 1em;
@@ -101,9 +112,12 @@ caption {
     font-weight: bolder;
 }
 
-
 tr:first-child, tfoot {
     background-color: var(--alternate-color);
+}
+
+thead tr th, tfoot tr td {
+    padding: .5em 1.5em .5em 1.5em;
 }
 
 th strong {
@@ -114,10 +128,9 @@ th strong {
 
 td:last-child, tfoot td:first-child, tfoot td:nth-of-type(4) {
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: .25em;
+    gap: 0.1em;
 }
 
 td:last-child img, tfoot img {
@@ -136,10 +149,6 @@ tbody tr:nth-child(odd) {
     background-color: var(--body-color);
 }
 
-tfoot tr td:nth-last-of-type(1) {
-    display: flex;
-    justify-content: flex-start;
-}
 
 tfoot tr td {
     text-align: center
@@ -183,8 +192,7 @@ tbody tr:hover {
     box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px -15px 10px -12px rgba(0,0,0,0.05), inset 15px 10px -12px rgba(255,255,255,0.1);
 }
 
-.header img:hover, .table-svgs:hover {
-    transition: all .35s ease-in-out;
+.table-svgs:hover {
     transform: scale(1.5);
     cursor:pointer;
 }
@@ -198,6 +206,8 @@ tbody tr:hover {
     gap: .25em;
     background-color: var(--alternate-color);
     border-radius: 1em;
+    box-shadow: var(--alternate-color) 0px 7px 29px 0px;
+
 }
 
 .user-info p {
@@ -216,10 +226,18 @@ tbody tr:hover {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 1em;
+    padding: .25em 1.25em 1.5em 2em;
 }
 
 .footer {
     grid-area: foot;
     grid-column: 1 / -1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    letter-spacing: .25em;
+    font-weight: bolder;
+    font-size: 1.25em;
+    padding: .5em;
+    background-color: var(--alternate-color);
 }
