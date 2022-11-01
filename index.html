@@ -163,21 +163,68 @@
 
                         <tr>
 
-                            <td><img src="img/delete.svg" class="table-svgs" alt="Delete SVG"></td>
+                            <td><img src="img/delete.svg" class="table-svgs" id="delete-all" alt="Delete SVG"></td>
 
                             <td colspan="5">
                                 
                             </td>
                                 
                            
-                            <td><img src="img/archive.svg" class="table-svgs" alt="Deleted Archive SVG"></td>
-                            <td><img src="img/add.svg" class="table-svgs" alt="Add Item SVG"></img></td></td>
+                            <td><img src="img/archive.svg" class="table-svgs" id="deleted-books" alt="Deleted Archive SVG"></td>
+                            <td><img src="img/add.svg" class="table-svgs" id="add-book" alt="Add Item SVG"></img></td></td>
                             
                         </tr>
 
                     </tfoot>
 
             </table>
+
+            <div id="addBook">
+                <img src="img/exit.svg" alt="Exit SVG">
+                <h2>Add New Book</h2>
+
+                    <ul>
+
+                        <li>
+                            <label for="title"><h4>Title:</h4></label>
+                            <input type="text" name="title">
+                        </li>
+
+                        <li>
+                            <label for="author"><h4>Author:</h4></label>
+                            <input type="text" name="author">
+                        </li>
+
+                        <li>
+                            <label for="pages"><h4>Pages:</h4></label>
+                            <input type="text" name="pages">
+                        </li>
+
+                        <li>
+                            <label for="published"><h4>Published:</h4></label>
+                            <input type="date" name="published" >
+                        </li>
+
+                        <li>
+                            <label for="acquired"><h4>Acquired:</h4></label>
+                            <input type="date" name="acquired" placeholder="dd/mm/yyyy">
+                        </li>
+
+                        <li>
+                            <label for="status"><h4>Status:</h4></label>
+
+                            <select name="status" id="read-status">
+                                <option value="Read">Read</option>
+                                <option value="Unread">Unread</option>
+                            </select>
+
+                        </li>
+
+                        <button>Add Book</button>
+
+                    </ul>
+
+            </div>
 
         </main>
 

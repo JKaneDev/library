@@ -241,3 +241,104 @@ tbody tr:hover {
     padding: .5em;
     background-color: var(--alternate-color);
 }
+
+#addBook {
+    height: 420px;
+    width: 420px;
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid var(--special-font-color);
+    background-color: var(--body-color);
+
+}
+
+#addBook h2 {
+    position: relative;
+    top: -10px;
+    right: -120px;
+}
+
+
+#addBook img {
+    transition: all .35s ease;
+    filter: var(--svg-filter);
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    right: -360px;
+
+}
+
+#addBook img:hover {
+    transform: scale(1.5) rotate(-360deg);
+    cursor: pointer;
+}
+
+#addBook ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5em;
+    gap: .5em;
+}
+
+#addBook ul li {
+    list-style-type: none;
+    display: inline;
+    padding-bottom: .5em;
+}
+
+#addBook ul li label {
+    width: 140px;
+    display: inline-block;
+    letter-spacing: .2em;
+    font-weight: bolder;
+}
+
+#addBook ul li label p {
+    box-shadow: var(--alternate-color) 0px 5px 15px;
+}
+
+#addBook ul li input, #addBook ul li select {
+    color: var(--alternate-color);
+    width: 180px;
+    appearance: none;
+    outline: none;
+    border: .5px solid var(--alternate-color);
+    border-radius: 4px;
+    padding: .25em;
+}
+
+#addBook ul li input:active,
+#addBook ul li input:focus,
+#addBook ul li select:active,
+#addBook ul li select:focus {
+    border: 2px solid var(--special-font-color);
+}
+
+#addBook ul button {
+    appearance: none;
+    outline: none;
+    width: 120px;
+    color: black;
+    border: 2px solid var(--alternate-color);
+    border-radius: 3px;
+    font-weight: bolder;
+    letter-spacing: .2em;
+    padding: .5em 1em;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+    margin-top: 1em 0;
+    bottom: -10px;
+    transition: all .35s ease;
+}
+
+#addBook ul button:hover {
+    border: 2px solid var(--special-font-color);
+    background-color: var(--alternate-color);
+    color: var(--main-font-color);
+    transform: scale(1.1);
+}
