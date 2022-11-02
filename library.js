@@ -1,5 +1,15 @@
+const container = document.querySelector('.container');
 const table = document.querySelector('.books');
 const tbody = document.querySelector('.books').getElementsByTagName('tbody')[0];
+const addBook = document.getElementById('add-book');
+const modal = document.getElementById('addBook');
+const exitModal = document.getElementById('exit-modal');
+const darkenDiv = document.querySelector('.darken');
+
+//Event Listeners
+addBook.addEventListener('click', openModal);
+exitModal.addEventListener('click', closeModal);
+
 
 let myLibrary = [];
 
@@ -43,13 +53,18 @@ function createEditFunctions() {
     return cell;
 }
 
-function addBooksToLibrary() {
+function addAllBooksToLibrary() {
+    // Loop through library
     for (let book of myLibrary) {
 
+        //Create new row in table
         let newRow = tbody.insertRow();
+
+        //Create checkbox for first cell
         let checkbox = createCheckbox();
        
 
+        //Insert all book data with checkbox and edit functions
         newRow.insertCell().appendChild(checkbox);
         newRow.insertCell().textContent = book.title;
         newRow.insertCell().textContent = book.author;
@@ -63,4 +78,15 @@ function addBooksToLibrary() {
     } 
 }
 
-addBooksToLibrary();
+addAllBooksToLibrary();
+
+
+function openModal() {
+    modal.style.display = 'block';
+    container.style.opacity = '0.5';
+}
+
+function closeModal() {
+    modal.style.display = 'none';
+    container.style.opacity = '1';
+}
