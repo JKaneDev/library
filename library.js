@@ -1,92 +1,162 @@
 const container = document.querySelector('.container');
 const table = document.querySelector('.books');
+const thead = document.querySelector('.thead');
 const tbody = document.querySelector('.books').getElementsByTagName('tbody')[0];
 const addBook = document.getElementById('add-book');
 const modal = document.getElementById('addBook');
 const exitModal = document.getElementById('exit-modal');
 const darkenDiv = document.querySelector('.darken');
+const addBookToLibrary = document.getElementById('submit-book');
+const bookTitle = document.getElementById('title');
+const bookAuthor = document.getElementById('author');
+const bookPages = document.getElementById('pages');
+const bookPublished = document.getElementById('published');
+const bookAcquired = document.getElementById('acquired');
+const bookStatus = document.getElementById('read-status');
+const deleteRows = document.querySelectorAll('.delete-svg');
+const selectRows = document.querySelectorAll('.tbody-checkboxes');
+const selectAllRows = document.querySelector('.select-all');
 
 //Event Listeners
 addBook.addEventListener('click', openModal);
 exitModal.addEventListener('click', closeModal);
+addBookToLibrary.addEventListener('click', addIndividualBook);
+deleteRows.forEach(deleteRow => deleteRow.addEventListener('click', deleteThisRow));
+selectRows.forEach(selectRow => selectRow.addEventListener('click', toggleDelete));
+selectAllRows.addEventListener('click', selectAll);
 
 
 let myLibrary = [];
+let myDeletedBooks = [];
 
 function Book(title, author, pages, published, acquired, status) {
-    this.title = title;
-    this.author = author;
-    this.pages = pages;
-    this.published = published;
-    this.acquired = acquired;
-    this.status = status;
+	this.title = title;
+	this.author = author;
+	this.pages = pages;
+	this.published = published;
+	this.acquired = acquired;
+	this.status = status;
 }
 
-const theHobbit = new Book('The Hobbit', 'J.R.R Tolkien', '310', '20/04/2009', '21/10/2016', 'Read');
-myLibrary.push(theHobbit);
-
 function createCheckbox() {
-    let checkbox = document.createElement('input');
+	let checkbox = document.createElement('input');
 
-    checkbox.type = 'checkbox';
-    checkbox.className = 'checkboxes'; 
+	checkbox.type = 'checkbox';
+	checkbox.className = 'checkboxes';
 
-    return checkbox;
+	return checkbox;
 }
 
 function createEditFunctions() {
-    let cell = document.createElement('div')
+	let cell = document.createElement('div');
 
-    let trash = document.createElement('img');
-    trash.setAttribute('src', 'img/delete.svg');
-    trash.classList.add('table-svgs');
-    trash.setAttribute('alt', 'Delete SVG');
+	let trash = document.createElement('img');
+	trash.setAttribute('src', 'img/delete.svg');
+	trash.classList.add('table-svgs');
+    trash.classList.add('delete-svg');
+	trash.setAttribute('alt', 'Delete SVG');
 
-    let edit = document.createElement('img');
-    edit.setAttribute('src', 'img/edit.svg');
-    edit.classList.add('table-svgs');
-    edit.setAttribute('alt', 'Edit SVG');
+	let edit = document.createElement('img');
+	edit.setAttribute('src', 'img/edit.svg');
+	edit.classList.add('table-svgs');
+	edit.setAttribute('alt', 'Edit SVG');
 
-    cell.appendChild(trash);
-    cell.appendChild(edit);
-    
-    return cell;
+	cell.appendChild(trash);
+	cell.appendChild(edit);
+
+	return cell;
+}
+
+function openModal() {
+	modal.style.display = 'block';
+	container.style.opacity = '0.5';
+}
+
+function closeModal() {
+	modal.style.display = 'none';
+	container.style.opacity = '1';
 }
 
 function addAllBooksToLibrary() {
-    // Loop through library
-    for (let book of myLibrary) {
+	// Loop through library
+	for (let book of myLibrary) {
+		//Create new row in table
+		let newRow = tbody.insertRow();
 
-        //Create new row in table
-        let newRow = tbody.insertRow();
+		//Create checkbox for first cell
+		let checkbox = createCheckbox();
 
-        //Create checkbox for first cell
-        let checkbox = createCheckbox();
-       
+		//Insert all book data with checkbox and edit functions
+		newRow.insertCell().appendChild(checkbox);
+		newRow.insertCell().textContent = book.title;
+		newRow.insertCell().textContent = book.author;
+		newRow.insertCell().textContent = book.pages;
+		newRow.insertCell().textContent = book.published;
+		newRow.insertCell().textContent = book.acquired;
+		newRow.insertCell().textContent = book.status;
 
-        //Insert all book data with checkbox and edit functions
-        newRow.insertCell().appendChild(checkbox);
-        newRow.insertCell().textContent = book.title;
-        newRow.insertCell().textContent = book.author;
-        newRow.insertCell().textContent = book.pages;
-        newRow.insertCell().textContent = book.published;
-        newRow.insertCell().textContent = book.acquired;
-        newRow.insertCell().textContent = book.status;
-
-        let editFunctions = createEditFunctions();
-        newRow.insertCell().appendChild(editFunctions);
-    } 
+		let editFunctions = createEditFunctions();
+		newRow.insertCell().appendChild(editFunctions);
+	}
 }
 
 addAllBooksToLibrary();
 
+function addIndividualBook() {
+    //Create new book object
+	let newBook = new Book(
+		bookTitle.value,
+		bookAuthor.value,
+		bookPages.value,
+		bookPublished.value,
+		bookAcquired.value,
+		bookStatus.options[bookStatus.selectedIndex].value
+	);
 
-function openModal() {
-    modal.style.display = 'block';
-    container.style.opacity = '0.5';
+	console.log(newBook);
+
+	let newRow = tbody.insertRow();
+
+	//Create checkbox for first cell
+	let checkbox = createCheckbox();
+
+	//Insert all book data with checkbox and edit functions
+	newRow.insertCell().appendChild(checkbox);
+	newRow.insertCell().textContent = newBook.title;
+	newRow.insertCell().textContent = newBook.author;
+	newRow.insertCell().textContent = newBook.pages;
+	newRow.insertCell().textContent = newBook.published;
+	newRow.insertCell().textContent = newBook.acquired;
+	newRow.insertCell().textContent = newBook.status;
+
+	let editFunctions = createEditFunctions();
+	newRow.insertCell().appendChild(editFunctions);
+
+    closeModal();
 }
 
-function closeModal() {
-    modal.style.display = 'none';
-    container.style.opacity = '1';
+function deleteThisRow(ev) {
+    let td = ev.target.parentNode;
+    let tr = td.parentNode;
 }
+
+function toggleDelete(ev) {
+    let td = ev.target.parentNode;
+    let tr = td.parentNode;
+
+    tr.classList.toggle('delete');
+
+
+
+} 
+
+function selectAll(ev) {
+    console.log(tbody.childNodes);
+
+    let tbodyRows = tbody.childNodes;
+    tbodyRows.forEach(tbodyRow => tbodyRow.classList.toggle('delete'));
+
+    console.log(tbodyRows.classList);
+}
+
+

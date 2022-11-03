@@ -15,7 +15,7 @@
     margin: 0;
     padding: 0;
     color: var(--main-font-color);
-    font-family: 'Roboto', 'Helvetica', 'sans-serif';
+    font-family: 'Helvetica', 'Roboto', 'sans-serif';
 }
 
 img {
@@ -159,7 +159,7 @@ tbody tr:hover {
     outline: 1px solid var(--special-font-color);
 }
 
-.checkboxes {
+.tbody-checkboxes {
     appearance: none;
     background-color: var(--body-color);
     border: 1px solid var(--main-font-color);
@@ -170,16 +170,16 @@ tbody tr:hover {
     cursor: pointer;
 }
 
-.checkboxes:hover {
+.tbody-checkboxes:hover {
     border: 2px solid var(--main-font-color);
 }
 
-.checkboxes:active, .checkboxes:checked:active {
+.tbody-checkboxes:active, .tbody-checkboxes:checked:active {
     background-color: var(--special-font-color);
     color: var(--alternate-color);
 }
 
-.checkboxes:checked:after {
+.tbody-checkboxes:checked:after {
     content: '\2714';
     font-size: 11px;
     border: 1px solid var(--special-font-color);
