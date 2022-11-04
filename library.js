@@ -21,10 +21,13 @@ const selectAllRows = document.querySelector('.select-all');
 addBook.addEventListener('click', openModal);
 exitModal.addEventListener('click', closeModal);
 addBookToLibrary.addEventListener('click', addIndividualBook);
-deleteRows.forEach(deleteRow => deleteRow.addEventListener('click', deleteThisRow));
-selectRows.forEach(selectRow => selectRow.addEventListener('click', toggleDelete));
+deleteRows.forEach((deleteRow) =>
+	deleteRow.addEventListener('click', deleteThisRow)
+);
+selectRows.forEach((selectRow) =>
+	selectRow.addEventListener('click', toggleDelete)
+);
 selectAllRows.addEventListener('click', selectAll);
-
 
 let myLibrary = [];
 let myDeletedBooks = [];
@@ -53,7 +56,7 @@ function createEditFunctions() {
 	let trash = document.createElement('img');
 	trash.setAttribute('src', 'img/delete.svg');
 	trash.classList.add('table-svgs');
-    trash.classList.add('delete-svg');
+	trash.classList.add('delete-svg');
 	trash.setAttribute('alt', 'Delete SVG');
 
 	let edit = document.createElement('img');
@@ -103,7 +106,7 @@ function addAllBooksToLibrary() {
 addAllBooksToLibrary();
 
 function addIndividualBook() {
-    //Create new book object
+	//Create new book object
 	let newBook = new Book(
 		bookTitle.value,
 		bookAuthor.value,
@@ -132,31 +135,29 @@ function addIndividualBook() {
 	let editFunctions = createEditFunctions();
 	newRow.insertCell().appendChild(editFunctions);
 
-    closeModal();
+	closeModal();
 }
 
 function deleteThisRow(ev) {
-    let td = ev.target.parentNode;
-    let tr = td.parentNode;
+	let td = ev.target.parentNode;
+	let tr = td.parentNode;
 }
 
 function toggleDelete(ev) {
-    let td = ev.target.parentNode;
-    let tr = td.parentNode;
+	let td = ev.target.parentNode;
+	let tr = td.parentNode;
 
-    tr.classList.toggle('delete');
-
-
-
-} 
-
-function selectAll(ev) {
-    console.log(tbody.childNodes);
-
-    let tbodyRows = tbody.childNodes;
-    tbodyRows.forEach(tbodyRow => tbodyRow.classList.toggle('delete'));
-
-    console.log(tbodyRows.classList);
+	tr.classList.toggle('delete');
 }
 
+function selectAll(ev) {
+	let rows = tbody.rows;
+    const isChecked = selectAllRows.checked;
+	for (i = 0; i < rows.length; i++) {
+		rows[i].classList.toggle('delete');
 
+		rows[i].querySelector('.tbody-checkboxes').checked = isChecked;
+
+		console.log(rows[i].classList);
+	}
+}
