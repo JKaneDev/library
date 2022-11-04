@@ -168,15 +168,14 @@ function selectAll(ev) {
 		rows[i].classList.toggle('delete');
 
 		rows[i].querySelector('.tbody-checkboxes').checked = isChecked;
-
-		console.log(rows[i].classList);
 	}
 }
 
 function deleteAll(ev) {
-	let rows = tbody.rows;
+	let rows = Array.from(tbody.rows);
 
 	for (let i = 0; i < rows.length; i++) {
+        console.log(rows[i]);
 		if (rows[i].classList.contains('delete')) {
 			rows[i].remove();
 		}
