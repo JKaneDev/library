@@ -141,6 +141,10 @@ function addIndividualBook() {
 function deleteThisRow(ev) {
 	let td = ev.target.parentNode;
 	let tr = td.parentNode;
+
+    if (tr.classList.contains('delete')) {
+        tr.remove();
+    }
 }
 
 function toggleDelete(ev) {
@@ -148,11 +152,13 @@ function toggleDelete(ev) {
 	let tr = td.parentNode;
 
 	tr.classList.toggle('delete');
+
+    console.log(tr.classList);
 }
 
 function selectAll(ev) {
 	let rows = tbody.rows;
-    const isChecked = selectAllRows.checked;
+	const isChecked = selectAllRows.checked;
 	for (i = 0; i < rows.length; i++) {
 		rows[i].classList.toggle('delete');
 
