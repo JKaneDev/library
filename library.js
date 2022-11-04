@@ -153,11 +153,11 @@ function toggleDelete(ev) {
 	let td = ev.target.parentNode;
 	let tr = td.parentNode;
 
-	if (tr.classList.contains('select-all')) {
-		tr.classList.toggle('delete');
-	}
+    if (!tr.classList.contains('select-all')) {
+	tr.classList.toggle('delete');
+    }
 
-	console.log(tr.classList);
+    console.log(tr.classList);
 }
 
 function selectAll(ev) {

@@ -42,6 +42,7 @@ img {
 .header {
     background-color: var(--alternate-color);
     box-shadow: var(--alternate-color) 0px 5px 15px;
+    max-height: 80px;
 }
 
 .header div:nth-of-type(2) img:hover {
@@ -63,6 +64,7 @@ img {
         "user user user"
         "foot foot foot";
     grid-template-columns: 3fr 1fr;
+    grid-template-rows: 80px 1fr 80px;
     height: 100vh;
 }
 
@@ -231,6 +233,7 @@ tbody tr:hover {
 }
 
 .footer {
+    max-height: 80px;
     grid-area: foot;
     grid-column: 1 / -1;
     display: flex;
