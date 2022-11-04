@@ -16,6 +16,7 @@ const bookStatus = document.getElementById('read-status');
 const deleteRows = document.querySelectorAll('.delete-svg');
 const selectRows = document.querySelectorAll('.tbody-checkboxes');
 const selectAllRows = document.querySelector('.select-all');
+const deleteAllRows = document.getElementById('delete-all');
 
 //Event Listeners
 addBook.addEventListener('click', openModal);
@@ -28,6 +29,7 @@ selectRows.forEach((selectRow) =>
 	selectRow.addEventListener('click', toggleDelete)
 );
 selectAllRows.addEventListener('click', selectAll);
+deleteAllRows.addEventListener('click', deleteAll);
 
 let myLibrary = [];
 let myDeletedBooks = [];
@@ -142,28 +144,41 @@ function deleteThisRow(ev) {
 	let td = ev.target.parentNode;
 	let tr = td.parentNode;
 
-    if (tr.classList.contains('delete')) {
-        tr.remove();
-    }
+	if (tr.classList.contains('delete')) {
+		tr.remove();
+	}
 }
 
 function toggleDelete(ev) {
 	let td = ev.target.parentNode;
 	let tr = td.parentNode;
 
-	tr.classList.toggle('delete');
+	if (tr.classList.contains('select-all')) {
+		tr.classList.toggle('delete');
+	}
 
-    console.log(tr.classList);
+	console.log(tr.classList);
 }
 
 function selectAll(ev) {
 	let rows = tbody.rows;
 	const isChecked = selectAllRows.checked;
+
 	for (i = 0; i < rows.length; i++) {
 		rows[i].classList.toggle('delete');
 
 		rows[i].querySelector('.tbody-checkboxes').checked = isChecked;
 
 		console.log(rows[i].classList);
+	}
+}
+
+function deleteAll(ev) {
+	let rows = tbody.rows;
+
+	for (let i = 0; i < rows.length; i++) {
+		if (rows[i].classList.contains('delete')) {
+			rows[i].remove();
+		}
 	}
 }
