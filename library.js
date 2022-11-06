@@ -144,9 +144,7 @@ function deleteThisRow(ev) {
 	let td = ev.target.parentNode;
 	let tr = td.parentNode;
 
-	if (tr.classList.contains('delete')) {
-		tr.remove();
-	}
+	tr.remove();
 }
 
 function toggleDelete(ev) {
@@ -180,4 +178,6 @@ function deleteAll(ev) {
 			rows[i].remove();
 		}
 	}
+
+	console.log(myLibrary);
 }
