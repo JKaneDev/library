@@ -47,7 +47,7 @@ function createCheckbox() {
 	let checkbox = document.createElement('input');
 
 	checkbox.type = 'checkbox';
-	checkbox.className = 'checkboxes';
+	checkbox.className = 'tbody-checkboxes';
 
 	return checkbox;
 }
@@ -60,6 +60,12 @@ function createEditFunctions() {
 	trash.classList.add('table-svgs');
 	trash.classList.add('delete-svg');
 	trash.setAttribute('alt', 'Delete SVG');
+	trash.addEventListener('click', (ev) => {
+		let iconContainer = ev.target.parentNode;
+		let td = iconContainer.parentNode;
+		let tr = td.parentNode;
+		tr.remove();
+	});
 
 	let edit = document.createElement('img');
 	edit.setAttribute('src', 'img/edit.svg');
