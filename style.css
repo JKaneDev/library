@@ -64,7 +64,7 @@ img {
         "user user user"
         "foot foot foot";
     grid-template-columns: 3fr 1fr;
-    grid-template-rows: 80px 1fr 80px;
+    grid-template-rows: 80px 1fr 120px 80px;
     height: 100vh;
 }
 
@@ -129,13 +129,6 @@ th strong {
     color: var(--special-font-color);
 }
 
-td:last-child, tfoot td:first-child, tfoot td:nth-of-type(4) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.1em;
-}
-
 td:last-child img, tfoot img {
     filter: var(--svg-filter);
 }
@@ -147,6 +140,8 @@ th, td {
     text-align: center;
     border: none;
 }
+
+
 
 tbody tr:nth-child(odd) {
     background-color: var(--body-color);
