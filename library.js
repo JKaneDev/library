@@ -4,7 +4,10 @@ const thead = document.querySelector('.thead');
 const tbody = document.querySelector('.books').getElementsByTagName('tbody')[0];
 const addBook = document.getElementById('add-book');
 const modal = document.getElementById('addBook');
+const modalEdit = document.getElementById('edit-book');
+const rowEdit = document.querySelector('.edit-svg');
 const exitModal = document.getElementById('exit-modal');
+const exitEditModal = document.getElementById('exit-edit-modal');
 const darkenDiv = document.querySelector('.darken');
 const addBookToLibrary = document.getElementById('submit-book');
 const bookTitle = document.getElementById('title');
@@ -30,9 +33,14 @@ selectRows.forEach((selectRow) =>
 );
 selectAllRows.addEventListener('click', selectAll);
 deleteAllRows.addEventListener('click', deleteAll);
+rowEdit.addEventListener('click', editBook);
+exitModal.addEventListener('click', closeModal);
+exitEditModal.addEventListener('click', closeEditModal);
 
 let myLibrary = [];
 let myDeletedBooks = [];
+
+addAllBooksToLibrary();
 
 function Book(title, author, pages, published, acquired, status) {
 	this.title = title;
@@ -41,6 +49,15 @@ function Book(title, author, pages, published, acquired, status) {
 	this.published = published;
 	this.acquired = acquired;
 	this.status = status;
+}
+
+function populateLibrary() {
+	const theBookOfNotKnowing = new Book('The Book Of Not Knowing', 'Peter Ralston', '601', '21/08/2010', '10/10/2020', 'Read');
+	const fireAndBlood = new Book('Fire & Blood', 'George R.R Martin', '738', '20/11/2018', '18/10/2022', 'Not Read');
+	const theGeniusOfBeing = new Book('The Genius Of Being', 'Peter Ralston', '207', '28/02/2017', '21/08/2020', 'Read');
+	const theRiseOfTheDragon = new Book('The Rise Of The Dragon', 'George R.R Martin', '350', '25/10/2022', '27/10/2022', 'Not Read');
+
+	myLibrary.push(theBookOfNotKnowing, fireAndBlood, theGeniusOfBeing, theRiseOfTheDragon);
 }
 
 function createCheckbox() {
@@ -70,6 +87,7 @@ function createEditFunctions() {
 	let edit = document.createElement('img');
 	edit.setAttribute('src', 'img/edit.svg');
 	edit.classList.add('table-svgs');
+	edit.classList.add('edit-svg');
 	edit.setAttribute('alt', 'Edit SVG');
 
 	cell.appendChild(trash);
@@ -86,13 +104,23 @@ function openModal() {
 function closeModal() {
 	modal.style.display = 'none';
 	container.style.opacity = '1';
+
+}
+
+function closeEditModal() {
+	modalEdit.style.display = 'none';
+	container.style.opacity = '1';
 }
 
 function addAllBooksToLibrary() {
 	// Loop through library
+
+	populateLibrary();
+
 	for (let book of myLibrary) {
 		//Create new row in table
 		let newRow = tbody.insertRow();
+		newRow.classList.add(`${book.title.split(' ').join('-').toLowerCase()}`);
 
 		//Create checkbox for first cell
 		let checkbox = createCheckbox();
@@ -111,8 +139,6 @@ function addAllBooksToLibrary() {
 	}
 }
 
-addAllBooksToLibrary();
-
 function addIndividualBook() {
 	//Create new book object
 	let newBook = new Book(
@@ -125,8 +151,8 @@ function addIndividualBook() {
 	);
 
 	console.log(newBook);
-
 	let newRow = tbody.insertRow();
+	newRow.classList.add(`${newBook.title.toLowerCase().split(' ').join('-')}`);
 
 	//Create checkbox for first cell
 	let checkbox = createCheckbox();
@@ -143,7 +169,13 @@ function addIndividualBook() {
 	let editFunctions = createEditFunctions();
 	newRow.insertCell().appendChild(editFunctions);
 
+	
 	closeModal();
+
+	myLibrary.push(newBook);
+	console.log(myLibrary);
+	console.log(tbody);
+	console.log(newRow.classList);
 }
 
 function deleteThisRow(ev) {
@@ -186,4 +218,11 @@ function deleteAll(ev) {
 	}
 
 	console.log(myLibrary);
+}
+
+function editBook(ev) {
+	modalEdit.style.display = 'block';
+	container.style.opacity = '0.5';
+
+	
 }

@@ -347,3 +347,108 @@ tbody tr:hover {
     transform: scale(1.1);
 }
 
+#edit-book {
+    height: 420px;
+    width: 420px;
+    padding: 1em;
+    border-radius: 8px;
+    border: 1px solid var(--special-font-color);
+    background-color: var(--body-color);
+    box-shadow: var(--alternate-color) 0px 5px 15px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: none;
+}
+
+#edit-book h2 {
+    position: relative;
+    top: -10px;
+    right: -140px;
+}
+
+
+#edit-book img {
+    transition: all .35s ease;
+    filter: var(--svg-filter);
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    margin: 0;
+    position: relative;
+    right: -360px;
+
+}
+
+#edit-book img:hover {
+    transform: scale(1.5) rotate(-360deg);
+    cursor: pointer;
+}
+
+#edit-book ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 1.5em;
+    gap: .5em;
+}
+
+#edit-book ul li {
+    list-style-type: none;
+    display: inline;
+    padding-bottom: .5em;
+}
+
+#edit-book ul li label {
+    width: 140px;
+    display: inline-block;
+    letter-spacing: .2em;
+    font-weight: bolder;
+}
+
+#edit-book ul li label p {
+    box-shadow: var(--alternate-color) 0px 5px 15px;
+}
+
+#edit-book ul li input, #edit-book ul li select {
+    color: var(--alternate-color);
+    width: 180px;
+    appearance: none;
+    outline: none;
+    border: .5px solid var(--alternate-color);
+    border-radius: 4px;
+    padding: .25em;
+}
+
+#edit-book ul li input:active,
+#edit-book ul li input:focus,
+#edit-book ul li select:active,
+#edit-book ul li select:focus {
+    border: 2px solid var(--special-font-color);
+}
+
+#edit-book ul button {
+    appearance: none;
+    outline: none;
+    width: 120px;
+    color: black;
+    border: 2px solid var(--alternate-color);
+    border-radius: 3px;
+    font-weight: bolder;
+    letter-spacing: .2em;
+    padding: .5em 1em;
+    cursor: pointer;
+    position: relative;
+    align-self: center;
+    margin-top: 1em 0;
+    bottom: -10px;
+    transition: all .35s ease;
+}
+
+#edit-book ul button:hover {
+    border: 2px solid var(--special-font-color);
+    background-color: var(--alternate-color);
+    color: var(--main-font-color);
+    transform: scale(1.1);
+}
