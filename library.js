@@ -51,13 +51,55 @@ function Book(title, author, pages, published, acquired, status) {
 	this.status = status;
 }
 
-function populateLibrary() {
-	const theBookOfNotKnowing = new Book('The Book Of Not Knowing', 'Peter Ralston', '601', '21/08/2010', '10/10/2020', 'Read');
-	const fireAndBlood = new Book('Fire & Blood', 'George R.R Martin', '738', '20/11/2018', '18/10/2022', 'Not Read');
-	const theGeniusOfBeing = new Book('The Genius Of Being', 'Peter Ralston', '207', '28/02/2017', '21/08/2020', 'Read');
-	const theRiseOfTheDragon = new Book('The Rise Of The Dragon', 'George R.R Martin', '350', '25/10/2022', '27/10/2022', 'Not Read');
+function editBookModal(author, pages, published, acquired, read) {
+	title: this.title;
+	author: this.author;
+	pages: this.pages;
+	published: this.published;
+	acquired: this.acquired;
+	read: this.read;
+}
 
-	myLibrary.push(theBookOfNotKnowing, fireAndBlood, theGeniusOfBeing, theRiseOfTheDragon);
+function populateLibrary() {
+	const theBookOfNotKnowing = new Book(
+		'The Book Of Not Knowing',
+		'Peter Ralston',
+		'601',
+		'21/08/2010',
+		'10/10/2020',
+		'Read'
+	);
+	const fireAndBlood = new Book(
+		'Fire & Blood',
+		'George R.R Martin',
+		'738',
+		'20/11/2018',
+		'18/10/2022',
+		'Not Read'
+	);
+	const theGeniusOfBeing = new Book(
+		'The Genius Of Being',
+		'Peter Ralston',
+		'207',
+		'28/02/2017',
+		'21/08/2020',
+		'Read'
+	);
+	const theRiseOfTheDragon = new Book(
+		'The Rise Of The Dragon',
+		'George R.R Martin',
+		'350',
+		'25/10/2022',
+		'27/10/2022',
+		'Not Read'
+	);
+
+	myLibrary.push(
+		theBookOfNotKnowing,
+		fireAndBlood,
+		theGeniusOfBeing,
+		theRiseOfTheDragon
+	);
 }
 
 function createCheckbox() {
@@ -104,7 +146,6 @@ function openModal() {
 function closeModal() {
 	modal.style.display = 'none';
 	container.style.opacity = '1';
-
 }
 
 function closeEditModal() {
@@ -120,19 +161,46 @@ function addAllBooksToLibrary() {
 	for (let book of myLibrary) {
 		//Create new row in table
 		let newRow = tbody.insertRow();
-		newRow.classList.add(`${book.title.split(' ').join('-').toLowerCase()}`);
 
 		//Create checkbox for first cell
 		let checkbox = createCheckbox();
 
 		//Insert all book data with checkbox and edit functions
 		newRow.insertCell().appendChild(checkbox);
-		newRow.insertCell().textContent = book.title;
-		newRow.insertCell().textContent = book.author;
-		newRow.insertCell().textContent = book.pages;
-		newRow.insertCell().textContent = book.published;
-		newRow.insertCell().textContent = book.acquired;
-		newRow.insertCell().textContent = book.status;
+
+		//Creating and dding each cell, giving relevant class name and content
+
+		let titleCell = newRow.insertCell();
+		titleCell.textContent = book.title;
+		titleCell.classList.add(`${book.title.toLowerCase().split(' ').join('-')}`);
+
+		let authorCell = newRow.insertCell();
+		authorCell.textContent = book.author;
+		authorCell.classList.add(
+			`${book.author.toLowerCase().split(' ').join('-')}`
+		);
+
+		let pagesCell = newRow.insertCell();
+		pagesCell.textContent = book.pages;
+		pagesCell.classList.add(`${book.pages.toLowerCase().split(' ').join('-')}`);
+
+		let publishedCell = newRow.insertCell();
+		publishedCell.textContent = book.published;
+		publishedCell.classList.add(
+			`${book.published.toLowerCase().split(' ').join('-')}`
+		);
+
+		let acquiredCell = newRow.insertCell();
+		acquiredCell.textContent = book.acquired;
+		acquiredCell.classList.add(
+			`${book.acquired.toLowerCase().split(' ').join('-')}`
+		);
+
+		let statusCell = newRow.insertCell();
+		statusCell.textContent = book.status;
+		statusCell.classList.add(
+			`${book.status.toLowerCase().split(' ').join('-')}`
+		);
 
 		let editFunctions = createEditFunctions();
 		newRow.insertCell().appendChild(editFunctions);
@@ -159,17 +227,46 @@ function addIndividualBook() {
 
 	//Insert all book data with checkbox and edit functions
 	newRow.insertCell().appendChild(checkbox);
-	newRow.insertCell().textContent = newBook.title;
-	newRow.insertCell().textContent = newBook.author;
-	newRow.insertCell().textContent = newBook.pages;
-	newRow.insertCell().textContent = newBook.published;
-	newRow.insertCell().textContent = newBook.acquired;
-	newRow.insertCell().textContent = newBook.status;
 
+	let titleCell = newRow.insertCell();
+	titleCell.textContent = newBook.title;
+	titleCell.classList.add(
+		`${newBook.title.toLowerCase().split(' ').join('-')}`
+	);
+
+	let authorCell = newRow.insertCell();
+	authorCell.textContent = newBook.author;
+	authorCell.classList.add(
+		`${newBook.author.toLowerCase().split(' ').join('-')}`
+	);
+	
+	let pagesCell = newRow.insertCell();
+	pagesCell.textContent = newBook.pages;
+	pagesCell.classList.add(
+		`${newBook.pages.toLowerCase().split(' ').join('-')}`
+	);
+	
+	let publishedCell = newRow.insertCell();
+	publishedCell.textContent = newBook.published;
+	publishedCell.classList.add(
+		`${newBook.published.toLowerCase().split(' ').join('-')}`
+	);
+	
+	let acquiredCell = newRow.insertCell();
+	acquiredCell.textContent = newBook.acquired;
+	acquiredCell.classList.add(
+		`${newBook.acquired.toLowerCase().split(' ').join('-')}`
+	);
+	
+	let statusCell = newRow.insertCell();
+	statusCell.textContent = newBook.status;
+	statusCell.classList.add(
+		`${newBook.status.toLowerCase().split(' ').join('-')}`
+	);
+	
 	let editFunctions = createEditFunctions();
 	newRow.insertCell().appendChild(editFunctions);
 
-	
 	closeModal();
 
 	myLibrary.push(newBook);
@@ -189,11 +286,11 @@ function toggleDelete(ev) {
 	let td = ev.target.parentNode;
 	let tr = td.parentNode;
 
-    if (!tr.classList.contains('select-all')) {
-	tr.classList.toggle('delete');
-    }
+	if (!tr.classList.contains('select-all')) {
+		tr.classList.toggle('delete');
+	}
 
-    console.log(tr.classList);
+	console.log(tr.classList);
 }
 
 function selectAll(ev) {
@@ -211,7 +308,7 @@ function deleteAll(ev) {
 	let rows = Array.from(tbody.rows);
 
 	for (let i = 0; i < rows.length; i++) {
-        console.log(rows[i]);
+		console.log(rows[i]);
 		if (rows[i].classList.contains('delete')) {
 			rows[i].remove();
 		}
@@ -224,5 +321,9 @@ function editBook(ev) {
 	modalEdit.style.display = 'block';
 	container.style.opacity = '0.5';
 
-	
+	let editContainer = ev.target.parentNode;
+	let td = editContainer.parentNode;
+	let tr = td.parentNode;
+
+	let thisBook = new Modal();
 }
