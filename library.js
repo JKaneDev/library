@@ -4,10 +4,7 @@ const thead = document.querySelector('.thead');
 const tbody = document.querySelector('.books').getElementsByTagName('tbody')[0];
 const addBook = document.getElementById('add-book');
 const modal = document.getElementById('addBook');
-const modalEdit = document.getElementById('edit-book');
-
 const exitModal = document.getElementById('exit-modal');
-const exitEditModal = document.getElementById('exit-edit-modal');
 const darkenDiv = document.querySelector('.darken');
 const addBookToLibrary = document.getElementById('submit-book');
 const bookTitle = document.getElementById('title');
@@ -20,12 +17,7 @@ const deleteRows = document.querySelectorAll('.delete-svg');
 const selectRows = document.querySelectorAll('.tbody-checkboxes');
 const selectAllRows = document.querySelector('.select-all');
 const deleteAllRows = document.getElementById('delete-all');
-const editTitle = document.getElementById('edit-title');
-const editAuthor = document.getElementById('edit-author');
-const editPages = document.getElementById('edit-pages');
-const editPublished = document.getElementById('edit-published');
-const editAcquired = document.getElementById('edit-acquired');
-const editStatus = document.getElementById('edit-status');
+
 
 //Event Listeners
 addBook.addEventListener('click', openModal);
@@ -41,7 +33,6 @@ selectAllRows.addEventListener('click', selectAll);
 deleteAllRows.addEventListener('click', deleteAll);
 
 exitModal.addEventListener('click', closeModal);
-exitEditModal.addEventListener('click', closeEditModal);
 
 let myLibrary = [];
 let myDeletedBooks = [];
@@ -123,16 +114,8 @@ function createEditFunctions() {
 		tr.remove();
 	});
 
-	let edit = document.createElement('img');
-	edit.setAttribute('src', 'img/edit.svg');
-	edit.classList.add('table-svgs');
-	edit.classList.add('edit-svg');
-	edit.setAttribute('alt', 'Edit SVG');
-
-	edit.addEventListener('click', editBook);
 
 	cell.appendChild(trash);
-	cell.appendChild(edit);
 
 	return cell;
 }
@@ -205,7 +188,7 @@ function addAllBooksToLibrary() {
 		newRow.insertCell().appendChild(editFunctions);
 	}
 
-	// enumeratorForEditSVG();
+
 }
 
 function addIndividualBook() {
@@ -271,9 +254,6 @@ function addIndividualBook() {
 	closeModal();
 
 	myLibrary.push(newBook);
-	console.log(myLibrary);
-	console.log(tbody);
-	console.log(newRow.classList);
 }
 
 function deleteThisRow(ev) {
@@ -318,44 +298,3 @@ function deleteAll(ev) {
 	console.log(myLibrary);
 }
 
-function editBook(ev) {
-	modalEdit.style.display = 'block';
-	container.style.opacity = '0.5';
-
-	let editContainer = ev.target.parentNode;
-	let td = editContainer.parentNode;
-	let tr = td.parentNode;
-
-	let thisBook = myLibrary.find(
-		(book) => tr.querySelector('tr :nth-child(2)').textContent
-	);
-
-	let thisModal = {
-		title: thisBook.title,
-		author: thisBook.author,
-		pages: thisBook.pages,
-		published: thisBook.published,
-		acquired: thisBook.acquired,
-		status: thisBook.status,
-	};
-
-	editTitle.setAttribute('placeholder', `${thisBook.title}`);
-	editAuthor.setAttribute('placeholder', `${thisBook.author}`);
-	editPages.setAttribute('placeholder', `${thisBook.pages}`);
-	editPublished.setAttribute('value', `${thisBook.published}`);
-	editAcquired.setAttribute('value', `${thisBook.acquired}`);
-	// editStatus.options[bookStatus.selectedIndex].value = `${thisBook.status}`;
-
-	console.log(ev.target.id);
-}
-
-// function enumeratorForEditSVG() {
-// 	let count = 0;
-// 	for (let i in tbody.rows) {
-// 		let row = tbody.rows[i];
-// 		count++;
-// 		let thisSVG = row.querySelector('.edit-svg');
-// 		thisSVG.setAttribute('id', `${count}`);
-// 		thisSVG.addEventListener('click', editBook);
-// 	}
-// }
