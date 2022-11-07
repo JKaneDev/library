@@ -51,18 +51,18 @@
 
                 <tbody id="tbody">
 
-                    <tr class="book-info">
+                    <!-- <tr class="book-info">
 
                         <td><input type="checkbox" class="tbody-checkboxes"></td>
                         <td>The Greatest Minds And Ideas Of All Time</td>
                         <td>Will Durant</td>
                         <td>149</td>
-                        <td>07/11/2002</td>
-                        <td>06/06/2018</td>
+                        <td>2002-11-07</td>
+                        <td>2018-06-18</td>
                         <td>Read</td>
                         <td align="center" valign="center"><img src="img/delete.svg" class="table-svgs delete-svg" alt="Delete SVG"><img src="img/edit.svg" class="table-svgs edit-svg" alt="Edit SVG"></td>
 
-                    </tr>
+                    </tr> -->
 
                 </tbody>
 
@@ -218,33 +218,33 @@
 
                 <li>
                     <label for="title">Title:</label>
-                    <input type="text" name="title" id="title">
+                    <input type="text" name="title" id="edit-title">
                 </li>
 
                 <li>
                     <label for="author">Author:</label>
-                    <input type="text" name="author" id="author">
+                    <input type="text" name="author" id="edit-author">
                 </li>
 
                 <li>
                     <label for="pages">Pages:</label>
-                    <input type="text" name="pages" id="pages">
+                    <input type="text" name="pages" id="edit-pages">
                 </li>
 
                 <li>
                     <label for="published">Published:</label>
-                    <input type="date" name="published" id="published">
+                    <input type="date" name="published" id="edit-published" placeholder="yyyy-dd-mm">
                 </li>
 
                 <li>
                     <label for="acquired">Acquired:</label>
-                    <input type="date" name="acquired" placeholder="dd/mm/yyyy" id="acquired">
+                    <input type="date" name="acquired" placeholder="yyyy-dd-mm" id="edit-acquired">
                 </li>
 
                 <li>
                     <label for="status">Status</label>
 
-                    <select name="status" id="read-status" id="status">
+                    <select name="status" id="read-status" id="edit-status">
                         <option value="Read" selected>Read</option>
                         <option value="Unread">Unread</option>
                     </select>

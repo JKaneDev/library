@@ -5,7 +5,7 @@ const tbody = document.querySelector('.books').getElementsByTagName('tbody')[0];
 const addBook = document.getElementById('add-book');
 const modal = document.getElementById('addBook');
 const modalEdit = document.getElementById('edit-book');
-const rowEdit = document.querySelector('.edit-svg');
+
 const exitModal = document.getElementById('exit-modal');
 const exitEditModal = document.getElementById('exit-edit-modal');
 const darkenDiv = document.querySelector('.darken');
@@ -20,6 +20,12 @@ const deleteRows = document.querySelectorAll('.delete-svg');
 const selectRows = document.querySelectorAll('.tbody-checkboxes');
 const selectAllRows = document.querySelector('.select-all');
 const deleteAllRows = document.getElementById('delete-all');
+const editTitle = document.getElementById('edit-title');
+const editAuthor = document.getElementById('edit-author');
+const editPages = document.getElementById('edit-pages');
+const editPublished = document.getElementById('edit-published');
+const editAcquired = document.getElementById('edit-acquired');
+const editStatus = document.getElementById('edit-status');
 
 //Event Listeners
 addBook.addEventListener('click', openModal);
@@ -33,7 +39,7 @@ selectRows.forEach((selectRow) =>
 );
 selectAllRows.addEventListener('click', selectAll);
 deleteAllRows.addEventListener('click', deleteAll);
-rowEdit.addEventListener('click', editBook);
+
 exitModal.addEventListener('click', closeModal);
 exitEditModal.addEventListener('click', closeEditModal);
 
@@ -51,46 +57,37 @@ function Book(title, author, pages, published, acquired, status) {
 	this.status = status;
 }
 
-function editBookModal(author, pages, published, acquired, read) {
-	title: this.title;
-	author: this.author;
-	pages: this.pages;
-	published: this.published;
-	acquired: this.acquired;
-	read: this.read;
-}
-
 function populateLibrary() {
 	const theBookOfNotKnowing = new Book(
 		'The Book Of Not Knowing',
 		'Peter Ralston',
 		'601',
-		'21/08/2010',
-		'10/10/2020',
+		'2010-08-21',
+		'2020-10-10',
 		'Read'
 	);
 	const fireAndBlood = new Book(
 		'Fire & Blood',
 		'George R.R Martin',
 		'738',
-		'20/11/2018',
-		'18/10/2022',
+		'2018-11-20',
+		'2022-10-18',
 		'Not Read'
 	);
 	const theGeniusOfBeing = new Book(
 		'The Genius Of Being',
 		'Peter Ralston',
 		'207',
-		'28/02/2017',
-		'21/08/2020',
+		'2017-02-28',
+		'2020-08-21',
 		'Read'
 	);
 	const theRiseOfTheDragon = new Book(
 		'The Rise Of The Dragon',
 		'George R.R Martin',
 		'350',
-		'25/10/2022',
-		'27/10/2022',
+		'2022-10-25',
+		'2022-10-27',
 		'Not Read'
 	);
 
@@ -131,6 +128,8 @@ function createEditFunctions() {
 	edit.classList.add('table-svgs');
 	edit.classList.add('edit-svg');
 	edit.setAttribute('alt', 'Edit SVG');
+
+	edit.addEventListener('click', editBook);
 
 	cell.appendChild(trash);
 	cell.appendChild(edit);
@@ -205,6 +204,8 @@ function addAllBooksToLibrary() {
 		let editFunctions = createEditFunctions();
 		newRow.insertCell().appendChild(editFunctions);
 	}
+
+	// enumeratorForEditSVG();
 }
 
 function addIndividualBook() {
@@ -239,31 +240,31 @@ function addIndividualBook() {
 	authorCell.classList.add(
 		`${newBook.author.toLowerCase().split(' ').join('-')}`
 	);
-	
+
 	let pagesCell = newRow.insertCell();
 	pagesCell.textContent = newBook.pages;
 	pagesCell.classList.add(
 		`${newBook.pages.toLowerCase().split(' ').join('-')}`
 	);
-	
+
 	let publishedCell = newRow.insertCell();
 	publishedCell.textContent = newBook.published;
 	publishedCell.classList.add(
 		`${newBook.published.toLowerCase().split(' ').join('-')}`
 	);
-	
+
 	let acquiredCell = newRow.insertCell();
 	acquiredCell.textContent = newBook.acquired;
 	acquiredCell.classList.add(
 		`${newBook.acquired.toLowerCase().split(' ').join('-')}`
 	);
-	
+
 	let statusCell = newRow.insertCell();
 	statusCell.textContent = newBook.status;
 	statusCell.classList.add(
 		`${newBook.status.toLowerCase().split(' ').join('-')}`
 	);
-	
+
 	let editFunctions = createEditFunctions();
 	newRow.insertCell().appendChild(editFunctions);
 
@@ -325,5 +326,36 @@ function editBook(ev) {
 	let td = editContainer.parentNode;
 	let tr = td.parentNode;
 
-	let thisBook = new Modal();
+	let thisBook = myLibrary.find(
+		(book) => tr.querySelector('tr :nth-child(2)').textContent
+	);
+
+	let thisModal = {
+		title: thisBook.title,
+		author: thisBook.author,
+		pages: thisBook.pages,
+		published: thisBook.published,
+		acquired: thisBook.acquired,
+		status: thisBook.status,
+	};
+
+	editTitle.setAttribute('placeholder', `${thisBook.title}`);
+	editAuthor.setAttribute('placeholder', `${thisBook.author}`);
+	editPages.setAttribute('placeholder', `${thisBook.pages}`);
+	editPublished.setAttribute('value', `${thisBook.published}`);
+	editAcquired.setAttribute('value', `${thisBook.acquired}`);
+	// editStatus.options[bookStatus.selectedIndex].value = `${thisBook.status}`;
+
+	console.log(ev.target.id);
 }
+
+// function enumeratorForEditSVG() {
+// 	let count = 0;
+// 	for (let i in tbody.rows) {
+// 		let row = tbody.rows[i];
+// 		count++;
+// 		let thisSVG = row.querySelector('.edit-svg');
+// 		thisSVG.setAttribute('id', `${count}`);
+// 		thisSVG.addEventListener('click', editBook);
+// 	}
+// }
