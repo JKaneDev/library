@@ -253,7 +253,7 @@ tbody tr:hover {
     background-color: var(--alternate-color);
 }
 
-#addBook {
+.add-book-modal.active {
     height: 420px;
     width: 420px;
     padding: 1em;
@@ -268,14 +268,14 @@ tbody tr:hover {
     display: none;
 }
 
-#addBook h2 {
+.add-book-modal.active h2 {
     position: relative;
     top: -10px;
     right: -120px;
 }
 
 
-#addBook img {
+.add-book-modal.active img {
     transition: all .35s ease;
     filter: var(--svg-filter);
     width: 26px;
@@ -287,12 +287,12 @@ tbody tr:hover {
 
 }
 
-#addBook img:hover {
+.add-book-modal.active img:hover {
     transform: scale(1.5) rotate(-360deg);
     cursor: pointer;
 }
 
-#addBook ul {
+.add-book-modal.active ul {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -300,24 +300,24 @@ tbody tr:hover {
     gap: .5em;
 }
 
-#addBook ul li {
+.add-book-modal.active ul li {
     list-style-type: none;
     display: inline;
     padding-bottom: .5em;
 }
 
-#addBook ul li label {
+.add-book-modal.active ul li label {
     width: 140px;
     display: inline-block;
     letter-spacing: .2em;
     font-weight: bolder;
 }
 
-#addBook ul li label p {
+.add-book-modal.active ul li label p {
     box-shadow: var(--alternate-color) 0px 5px 15px;
 }
 
-#addBook ul li input, #addBook ul li select {
+.add-book-modal.active ul li input, .add-book-modal.active ul li select {
     color: var(--alternate-color);
     width: 180px;
     appearance: none;
@@ -327,14 +327,14 @@ tbody tr:hover {
     padding: .25em;
 }
 
-#addBook ul li input:active,
-#addBook ul li input:focus,
-#addBook ul li select:active,
-#addBook ul li select:focus {
+.add-book-modal.active ul li input:active,
+.add-book-modal.active ul li input:focus,
+.add-book-modal.active ul li select:active,
+.add-book-modal.active ul li select:focus {
     border: 2px solid var(--special-font-color);
 }
 
-#addBook ul button {
+.add-book-modal.active ul button {
     appearance: none;
     outline: none;
     width: 120px;
@@ -352,14 +352,14 @@ tbody tr:hover {
     transition: all .35s ease;
 }
 
-#addBook ul button:hover {
+.add-book-modal.active ul button:hover {
     border: 2px solid var(--special-font-color);
     background-color: var(--alternate-color);
     color: var(--main-font-color);
     transform: scale(1.1);
 }
 
-#edit-book {
+/* #edit-book {
     height: 420px;
     width: 420px;
     padding: 1em;
@@ -463,4 +463,4 @@ tbody tr:hover {
     background-color: var(--alternate-color);
     color: var(--main-font-color);
     transform: scale(1.1);
-}
+} */
