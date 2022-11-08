@@ -139,8 +139,20 @@ th, td {
     margin: 0;
     text-align: center;
     border: none;
+    transition: all .5s ease;
 }
 
+tbody tr td:nth-child(7) {
+    font-weight: bolder;
+    color: var(--main-font-color);
+    letter-spacing: .1em;
+}
+
+tbody tr td:nth-child(7):hover {
+    color: var(--special-font-color);
+    cursor: pointer;
+    transform: scale(1.1);
+}
 
 
 tbody tr:nth-child(odd) {
