@@ -366,9 +366,10 @@ tbody tr:hover {
 .toggle-status {
     color: var(--main-font-color);
     background: var(--body-color);
-    padding: .7em 1.5em;
+    padding: .7em 1em;
+    margin: 0;
     border: none;
-    box-shadow: var(--alternate-color) 0px 2px 8px 0px;
+    box-shadow: var(--alternate-color) 0px 1px 3px 0px, var(--alternate-color) 0px 1px 2px 0px;
     border-radius: .5em;
     cursor: pointer;
 }

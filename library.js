@@ -25,11 +25,13 @@ class Library {
 	}
 
 	removeBook(title) {
+		let books = Array.from(this.books)
 		this.books = this.books.filter((book) => book.title !== title);
 	}
 
 	getBook(title) {
-		this.books = this.books.find((book) => book.title === title);
+		let books = Array.from(this.books)
+		return books = books.find((book) => book.title == title);
 	}
 }
 
@@ -45,6 +47,7 @@ const addBookModal = document.querySelector('.add-book-modal');
 const addBookForm = document.getElementById('add-book-to-library');
 const addBookBtn = document.getElementById('add-book');
 const deleteSelectedBooksBtn = document.getElementById('delete-selected');
+const addBookToLibraryBtn = document.getElementById('submit-book');
 
 const openAddBookModal = (e) => {
 	addBookForm.reset();
@@ -52,8 +55,7 @@ const openAddBookModal = (e) => {
 	addBookModal.style.display = 'block';
 	container.style.opacity = '0.5';
 
-	
-	
+
 };
 
 const closeAddBookModal = () => {
@@ -94,7 +96,7 @@ const createRow = (book) => {
 
 	checkbox.setAttribute('type', 'checkbox');
 	checkbox.classList.add('tbody-checkboxes');
-	deleteIcon.setAttribute('src', 'img/delete.svg')
+	deleteIcon.setAttribute('src', 'img/delete.svg');
 	deleteIcon.classList.add('delete-svg', 'table-svgs');
 	deleteIcon.onclick = deleteBook;
 	statusCell.classList.add('status-cell');
@@ -112,7 +114,7 @@ const createRow = (book) => {
 		toggleStatusBtn.textContent = 'Read';
 		toggleStatusBtn.classList.add('btn-read-color');
 	} else {
-		toggleStatusBtn.textContent = 'Not Read';
+		toggleStatusBtn.textContent = 'Unread';
 		toggleStatusBtn.classList.add('btn-unread-color');
 	}
 
@@ -124,7 +126,7 @@ const createRow = (book) => {
 
 //Add individual book to library & table modal
 
-const addBookToLibraryBtn = document.getElementById('submit-book');
+
 
 const getBookFromModalInput = () => {
 	const title = document.getElementById('title').value;
@@ -158,26 +160,21 @@ const deleteBook = (e) => {
 			''
 		);
 
-		library.removeBook(title);
-		updateLibrary();
+	library.removeBook(title);
+	updateLibrary();
 };
 
 const toggleStatus = (e) => {
 	const title =
-		e.target.parentNode.parentNode.parentNode.firstChild.nextSibling.innerHTML.replaceAll(
-			'"',
-			''
-		);
+		e.target.parentNode.parentNode.firstChild.nextSibling.innerText;
 
-	const thisBook = library.getBook(title);
+	const book = library.getBook(title);
 
-	thisBook.isRead = !thisBook.isRead;
+	book.isRead = !book.isRead;
 	updateLibrary();
-}
+};
 
-const deleteSelectedBooks = (e) => {
-	
-}
+const deleteSelectedBooks = (e) => {};
 
 addBookBtn.addEventListener('click', openAddBookModal);
 deleteSelectedBooksBtn.addEventListener('click', deleteSelectedBooks);
@@ -185,21 +182,28 @@ addBookForm.addEventListener('submit', addBookToLibrary);
 window.onkeydown = escapeModal;
 
 const populateLibrary = () => {
-	
 	const theBookOfNotKnowing = {
 		title: 'The Book Of Not Knowing',
 		author: 'Peter Ralston',
 		pages: '601',
 		published: '2010-08-31',
 		acquired: '2020-08-21',
-		isRead: true
+		isRead: true,
+	};
+
+	const fireAndBlood = {
+		title: 'Fire & Blood',
+		author: 'George R.R Martin',
+		pages: '738',
+		published: '2018-11-20',
+		acquired: '2022-08-21',
+		isRead: true,
 	}
 
 	library.addBook(theBookOfNotKnowing);
+	library.addBook(fireAndBlood);
 
 	updateLibrary();
-
-}
+};
 
 populateLibrary();
-
