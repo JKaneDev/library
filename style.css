@@ -359,6 +359,25 @@ tbody tr:hover {
     transform: scale(1.1);
 }
 
+.status-cell {
+    transition: all .35s ease;
+}
+
+.toggle-status {
+    color: var(--main-font-color);
+    background: var(--body-color);
+    padding: .7em 1.5em;
+    border: none;
+    box-shadow: var(--alternate-color) 0px 2px 8px 0px;
+    border-radius: .5em;
+    cursor: pointer;
+}
+
+.toggle-status:hover {
+    transform: scale(1.1);
+    color: var(--special-font-color);
+    background-color: var(--alternate-color);
+}
 /* #edit-book {
     height: 420px;
     width: 420px;
