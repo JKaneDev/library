@@ -34,34 +34,39 @@ class Library {
 		return (books = books.find((book) => book.title == title));
 	}
 
+	getTotalBooks() {
+		let total = this.books.length;
+		return total;
+	}
+
+	getTotalPagesRead() {
+		let total = 0;
+		let books = this.books;
+		books.forEach(book => total += parseInt(book.pages));
+		return total; 
+	}
+
 	sortLibrary(e, property) {
-		library.books.sort((a, b) => (a[property] > b[property]) ? 1 : -1);
-	
+		library.books.sort((a, b) => (a[property] > b[property] ? 1 : -1));
+
 		const sortBy = e.target;
-	
+
 		if (sortBy.classList.contains('asc')) {
-	
 			sortBy.classList.remove('asc');
 			sortBy.classList.add('desc');
 			library.books.reverse();
-	
 		} else if (sortBy.classList.contains('desc')) {
-	
 			sortBy.classList.remove('desc');
 			sortBy.classList.add('asc');
-	
 		} else {
-	
-			
-	
 			for (let i = 0; i < sortByLinks.length; i++) {
 				sortByLinks[i].classList.remove('asc');
 				sortByLinks[i].classList.remove('desc');
 			}
-	
+
 			sortBy.classList.add('asc');
 		}
-	
+
 		updateLibrary();
 	}
 }
@@ -160,7 +165,26 @@ const createRow = (book) => {
 	statusCell.appendChild(toggleStatusBtn);
 };
 
-//Add individual book to library & table modal
+const deleteBook = (e) => {
+	const title =
+		e.target.parentNode.parentNode.parentNode.firstChild.nextSibling.innerText;
+
+	library.removeBook(title);
+	updateLibrary();
+	updateStats();
+
+};
+
+const toggleStatus = (e) => {
+	const title = e.target.parentNode.parentNode.firstChild.nextSibling.innerText;
+
+	const book = library.getBook(title);
+
+	book.isRead = !book.isRead;
+	updateLibrary();
+};
+
+//Add individual book to library, add book modal
 
 const getBookFromModalInput = () => {
 	const title = document.getElementById('title').value;
@@ -187,24 +211,6 @@ const addBookToLibrary = (e) => {
 	return;
 };
 
-const deleteBook = (e) => {
-	const title =
-		e.target.parentNode.parentNode.parentNode.firstChild.nextSibling.innerText;
-
-	console.log(title);
-
-	library.removeBook(title);
-	updateLibrary();
-};
-
-const toggleStatus = (e) => {
-	const title = e.target.parentNode.parentNode.firstChild.nextSibling.innerText;
-
-	const book = library.getBook(title);
-
-	book.isRead = !book.isRead;
-	updateLibrary();
-};
 
 const deleteSelectedBooks = (e) => {
 	let rows = Array.from(tbody.rows);
@@ -225,40 +231,6 @@ const selectAllBooks = (e) => {
 		rows[i].querySelector('.tbody-checkboxes').checked = isChecked;
 	}
 };
-
-
-
-// const tableHeaders = document.querySelectorAll('th a');
-//         for (let i = 0; i < tableHeaders.length; i++) {
-//             tableHeaders[i].addEventListener('click', (e) => {
-//                 e.preventDefault();
-//                 const prop = e.target.id.replace('head_', '');
-//                 this.sortBooks(e, prop);
-//             });
-//         }
-
-const sortRowsByAuthor = (e) => {};
-
-const sortRowsByPages = (e) => {};
-
-const sortRowsByPublishedDate = (e) => {};
-
-const sortRowsByAcquiredDate = (e) => {};
-
-addBookBtn.addEventListener('click', openAddBookModal);
-exitModalBtn.addEventListener('click', closeAddBookModal);
-selectAll.addEventListener('click', selectAllBooks);
-sortByLinks.forEach(sortByLink => {
-	sortByLink.addEventListener('click', (e) => {
-		const property = e.target.innerText.toLowerCase();
-		console.log('Sorting by ' + property);
-		library.sortLibrary(e, property);
-	})
-})
-
-deleteSelectedBooksBtn.addEventListener('click', deleteSelectedBooks);
-addBookForm.addEventListener('submit', addBookToLibrary);
-window.onkeydown = escapeModal;
 
 const populateLibrary = () => {
 	const theBookOfNotKnowing = {
@@ -306,3 +278,36 @@ const populateLibrary = () => {
 };
 
 populateLibrary();
+
+
+//Library statistics
+
+const totalBooks = document.querySelector('.total-books');
+const totalPages = document.querySelector('.total-pages');
+const uniqueAuthors = document.querySelector('.unique-authors');
+const readBooksTotal = document.querySelector('.read-books');
+const unreadBooksTotal = document.querySelector('.unread-books');
+const deletedBooksTotal = document.querySelector('.deleted-books');
+
+const updateStats = () => {
+	totalBooks.value = library.getTotalBooks();
+	totalPages.value = library.getTotalPagesRead();
+}
+
+updateStats();
+
+//Event Listeners
+addBookBtn.addEventListener('click', openAddBookModal);
+exitModalBtn.addEventListener('click', closeAddBookModal);
+selectAll.addEventListener('click', selectAllBooks);
+sortByLinks.forEach((sortByLink) => {
+	sortByLink.addEventListener('click', (e) => {
+		const property = e.target.innerText.toLowerCase();
+		library.sortLibrary(e, property);
+	});
+});
+deleteSelectedBooksBtn.addEventListener('click', deleteSelectedBooks);
+addBookForm.addEventListener('submit', addBookToLibrary);
+window.onkeydown = escapeModal;
+
+
