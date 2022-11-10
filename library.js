@@ -43,7 +43,6 @@ const container = document.querySelector('.container');
 const table = document.querySelector('.books');
 const selectAll = document.querySelector('.select-all');
 const tbody = document.getElementById('tbody');
-const deleteSelected = document.getElementById('delete-selected');
 const addBookModal = document.querySelector('.add-book-modal');
 const addBookForm = document.getElementById('add-book-to-library');
 const addBookBtn = document.getElementById('add-book');
@@ -153,10 +152,9 @@ const addBookToLibrary = (e) => {
 
 const deleteBook = (e) => {
 	const title =
-		e.target.parentNode.parentNode.parentNode.firstChild.nextSibling.innerHTML.replaceAll(
-			'"',
-			''
-		);
+		e.target.parentNode.parentNode.parentNode.firstChild.nextSibling.innerText;
+
+	console.log(title);
 
 	library.removeBook(title);
 	updateLibrary();
@@ -189,12 +187,11 @@ const selectAllBooks = (e) => {
 	for (let i = 0; i < rows.length; i++) {
 		rows[i].querySelector('.tbody-checkboxes').checked = isChecked;
 	}
-		
-}
+};
 
 addBookBtn.addEventListener('click', openAddBookModal);
 exitModalBtn.addEventListener('click', closeAddBookModal);
-selectAll.addEventListener('click', selectAllBooks)
+selectAll.addEventListener('click', selectAllBooks);
 deleteSelectedBooksBtn.addEventListener('click', deleteSelectedBooks);
 addBookForm.addEventListener('submit', addBookToLibrary);
 window.onkeydown = escapeModal;
