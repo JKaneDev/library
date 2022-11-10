@@ -48,14 +48,13 @@ const addBookForm = document.getElementById('add-book-to-library');
 const addBookBtn = document.getElementById('add-book');
 const deleteSelectedBooksBtn = document.getElementById('delete-selected');
 const addBookToLibraryBtn = document.getElementById('submit-book');
+const exitModalBtn = document.getElementById('exit-modal');
 
 const openAddBookModal = (e) => {
 	addBookForm.reset();
 	addBookModal.classList.add('active');
 	addBookModal.style.display = 'block';
 	container.style.opacity = '0.5';
-
-
 };
 
 const closeAddBookModal = () => {
@@ -177,6 +176,7 @@ const toggleStatus = (e) => {
 const deleteSelectedBooks = (e) => {};
 
 addBookBtn.addEventListener('click', openAddBookModal);
+exitModalBtn.addEventListener('click', closeAddBookModal);
 deleteSelectedBooksBtn.addEventListener('click', deleteSelectedBooks);
 addBookForm.addEventListener('submit', addBookToLibrary);
 window.onkeydown = escapeModal;

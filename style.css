@@ -253,6 +253,10 @@ tbody tr:hover {
     background-color: var(--alternate-color);
 }
 
+.add-book-modal {
+    display: none;
+}
+
 .add-book-modal.active {
     height: 420px;
     width: 420px;
@@ -265,7 +269,6 @@ tbody tr:hover {
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
-    display: none;
 }
 
 .add-book-modal.active h2 {
