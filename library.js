@@ -77,8 +77,14 @@ class Library {
 		let total = 0;
 		let books = this.books;
 
-		
+		for (let i = 0; i < books.length; i++) {
+			if (!books[i].isRead) {
+				total++;
+			}
+		}
+		return total; 
 	}
+
 
 	sortLibrary(e, property) {
 		library.books.sort((a, b) => (a[property] > b[property] ? 1 : -1));
@@ -103,7 +109,9 @@ class Library {
 
 		updateLibrary();
 	}
+
 }
+
 
 const library = new Library();
 
