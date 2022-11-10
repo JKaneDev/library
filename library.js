@@ -85,6 +85,15 @@ class Library {
 		return total; 
 	}
 
+	getTotalDeletedBooks() {
+		let total = this.deletedBooks.length;
+		return total;
+	}
+
+	pushToDeleted(title) {
+		let book = this.getBook(title);
+		this.deletedBooks.push(book);
+	}
 
 	sortLibrary(e, property) {
 		library.books.sort((a, b) => (a[property] > b[property] ? 1 : -1));
@@ -111,7 +120,6 @@ class Library {
 	}
 
 }
-
 
 const library = new Library();
 
@@ -152,6 +160,7 @@ const updateLibrary = () => {
 	for (let book of library.books) {
 		createRow(book);
 	}
+	updateStats();
 };
 
 const resetLibrary = () => {
@@ -211,7 +220,9 @@ const deleteBook = (e) => {
 	const title =
 		e.target.parentNode.parentNode.parentNode.firstChild.nextSibling.innerText;
 
+	pushToDeleted(title);
 	library.removeBook(title);
+
 	updateLibrary();
 	updateStats();
 };
@@ -259,6 +270,7 @@ const deleteSelectedBooks = (e) => {
 	rows.forEach((row) => {
 		let title = row.firstChild.nextSibling.innerText;
 		let checkbox = row.firstChild.firstChild;
+		library.pushToDeleted(title);
 		if (checkbox.checked) library.removeBook(title);
 	});
 	updateLibrary();
@@ -318,8 +330,6 @@ const populateLibrary = () => {
 	updateLibrary();
 };
 
-
-
 //Library statistics
 
 const totalBooks = document.querySelector('.total-books');
@@ -335,9 +345,8 @@ const updateStats = () => {
 	uniqueAuthors.value = library.getTotalUniqueAuthors();
 	readBooksTotal.value = library.getTotalReadBooks();
 	unreadBooksTotal.value = library.getTotalUnreadBooks();
+	deletedBooksTotal.value = library.getTotalDeletedBooks();
 };
-
-
 
 //Event Listeners
 addBookBtn.addEventListener('click', openAddBookModal);
