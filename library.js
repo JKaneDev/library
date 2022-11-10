@@ -18,6 +18,7 @@ class Book {
 class Library {
 	constructor() {
 		this.books = [];
+		this.deletedBooks = [];
 	}
 
 	addBook(newBook) {
@@ -62,15 +63,21 @@ class Library {
 
 	getTotalReadBooks() {
 		let total = 0;
+		let books = this.books;
 
-		library.books.forEach(book => console.log(book.isRead));
-
-		for (let i = 0; i < library.books.length; i++) {
-			if (library.books[i].isRead = true) {
+		for (let i = 0; i < books.length; i++) {
+			if (books[i].isRead) {
 				total++;
 			}
 		}
 		return total; 
+	}
+
+	getTotalUnreadBooks() {
+		let total = 0;
+		let books = this.books;
+
+		
 	}
 
 	sortLibrary(e, property) {
@@ -208,8 +215,7 @@ const toggleStatus = (e) => {
 
 	book.isRead = !book.isRead;
 	updateLibrary();
-
-	library.books.forEach(book => console.log(`${book.title} ` + book.isRead));
+	updateStats();
 };
 
 //Add individual book to library, add book modal
@@ -320,6 +326,7 @@ const updateStats = () => {
 	totalPages.value = library.getTotalPagesRead();
 	uniqueAuthors.value = library.getTotalUniqueAuthors();
 	readBooksTotal.value = library.getTotalReadBooks();
+	unreadBooksTotal.value = library.getTotalUnreadBooks();
 };
 
 
