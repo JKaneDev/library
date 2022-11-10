@@ -25,13 +25,13 @@ class Library {
 	}
 
 	removeBook(title) {
-		let books = Array.from(this.books)
+		let books = Array.from(this.books);
 		this.books = this.books.filter((book) => book.title !== title);
 	}
 
 	getBook(title) {
-		let books = Array.from(this.books)
-		return books = books.find((book) => book.title == title);
+		let books = Array.from(this.books);
+		return (books = books.find((book) => book.title == title));
 	}
 }
 
@@ -125,8 +125,6 @@ const createRow = (book) => {
 
 //Add individual book to library & table modal
 
-
-
 const getBookFromModalInput = () => {
 	const title = document.getElementById('title').value;
 	const author = document.getElementById('author').value;
@@ -164,8 +162,7 @@ const deleteBook = (e) => {
 };
 
 const toggleStatus = (e) => {
-	const title =
-		e.target.parentNode.parentNode.firstChild.nextSibling.innerText;
+	const title = e.target.parentNode.parentNode.firstChild.nextSibling.innerText;
 
 	const book = library.getBook(title);
 
@@ -173,7 +170,16 @@ const toggleStatus = (e) => {
 	updateLibrary();
 };
 
-const deleteSelectedBooks = (e) => {};
+const deleteSelectedBooks = (e) => {
+	let rows = Array.from(tbody.rows);
+
+	rows.forEach((row) => {
+		let title = row.firstChild.nextSibling.innerText;
+		let checkbox = row.firstChild.firstChild;
+		if (checkbox.checked) library.removeBook(title);
+	});
+	updateLibrary();
+};
 
 addBookBtn.addEventListener('click', openAddBookModal);
 exitModalBtn.addEventListener('click', closeAddBookModal);
@@ -197,11 +203,31 @@ const populateLibrary = () => {
 		pages: '738',
 		published: '2018-11-20',
 		acquired: '2022-08-21',
+		isRead: false,
+	};
+
+	const theGeniusOfBeing = {
+		title: 'The Genius Of Being',
+		author: 'Peter Ralston',
+		pages: '207',
+		published: '2017-02-28',
+		acquired: '2020-12-25',
 		isRead: true,
-	}
+	};
+
+	const theRiseOfTheDragon = {
+		title: 'The Rise Of The Dragon',
+		author: 'George R.R Martin',
+		pages: '350',
+		published: '2022-10-25',
+		acquired: '2022-11-01',
+		isRead: false,
+	};
 
 	library.addBook(theBookOfNotKnowing);
 	library.addBook(fireAndBlood);
+	library.addBook(theGeniusOfBeing);
+	library.addBook(theRiseOfTheDragon);
 
 	updateLibrary();
 };

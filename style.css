@@ -370,7 +370,7 @@ tbody tr:hover {
     color: var(--main-font-color);
     background: var(--body-color);
     padding: .7em 1em;
-    margin: 0;
+    margin: auto;
     border: none;
     box-shadow: var(--alternate-color) 0px 1px 3px 0px, var(--alternate-color) 0px 1px 2px 0px;
     border-radius: .5em;
