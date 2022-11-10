@@ -382,6 +382,11 @@ tbody tr:hover {
     color: var(--special-font-color);
     background-color: var(--alternate-color);
 }
+
+.thead-sort:hover {
+    cursor: pointer;
+    border-bottom: 2px solid var(--special-font-color);
+}
 /* #edit-book {
     height: 420px;
     width: 420px;

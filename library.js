@@ -33,6 +33,37 @@ class Library {
 		let books = Array.from(this.books);
 		return (books = books.find((book) => book.title == title));
 	}
+
+	sortLibrary(e, property) {
+		library.books.sort((a, b) => (a[property] > b[property]) ? 1 : -1);
+	
+		const sortBy = e.target;
+	
+		if (sortBy.classList.contains('asc')) {
+	
+			sortBy.classList.remove('asc');
+			sortBy.classList.add('desc');
+			library.books.reverse();
+	
+		} else if (sortBy.classList.contains('desc')) {
+	
+			sortBy.classList.remove('desc');
+			sortBy.classList.add('asc');
+	
+		} else {
+	
+			
+	
+			for (let i = 0; i < sortByLinks.length; i++) {
+				sortByLinks[i].classList.remove('asc');
+				sortByLinks[i].classList.remove('desc');
+			}
+	
+			sortBy.classList.add('asc');
+		}
+	
+		updateLibrary();
+	}
 }
 
 const library = new Library();
@@ -42,6 +73,12 @@ const library = new Library();
 const container = document.querySelector('.container');
 const table = document.querySelector('.books');
 const selectAll = document.querySelector('.select-all');
+const theadTitle = document.getElementById('sort-by-title');
+const theadAuthor = document.getElementById('sort-by-author');
+const theadPages = document.getElementById('sort-by-pages');
+const theadPublished = document.getElementById('sort-by-published');
+const theadAcquired = document.getElementById('sort-by-acquired');
+const sortByLinks = document.querySelectorAll('.thead-sort');
 const tbody = document.getElementById('tbody');
 const addBookModal = document.querySelector('.add-book-modal');
 const addBookForm = document.getElementById('add-book-to-library');
@@ -189,9 +226,36 @@ const selectAllBooks = (e) => {
 	}
 };
 
+
+
+// const tableHeaders = document.querySelectorAll('th a');
+//         for (let i = 0; i < tableHeaders.length; i++) {
+//             tableHeaders[i].addEventListener('click', (e) => {
+//                 e.preventDefault();
+//                 const prop = e.target.id.replace('head_', '');
+//                 this.sortBooks(e, prop);
+//             });
+//         }
+
+const sortRowsByAuthor = (e) => {};
+
+const sortRowsByPages = (e) => {};
+
+const sortRowsByPublishedDate = (e) => {};
+
+const sortRowsByAcquiredDate = (e) => {};
+
 addBookBtn.addEventListener('click', openAddBookModal);
 exitModalBtn.addEventListener('click', closeAddBookModal);
 selectAll.addEventListener('click', selectAllBooks);
+sortByLinks.forEach(sortByLink => {
+	sortByLink.addEventListener('click', (e) => {
+		const property = e.target.innerText.toLowerCase();
+		console.log('Sorting by ' + property);
+		library.sortLibrary(e, property);
+	})
+})
+
 deleteSelectedBooksBtn.addEventListener('click', deleteSelectedBooks);
 addBookForm.addEventListener('submit', addBookToLibrary);
 window.onkeydown = escapeModal;
