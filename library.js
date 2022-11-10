@@ -42,7 +42,34 @@ class Library {
 	getTotalPagesRead() {
 		let total = 0;
 		let books = this.books;
-		books.forEach(book => total += parseInt(book.pages));
+		books.forEach((book) => (total += parseInt(book.pages)));
+		return total;
+	}
+
+	getTotalUniqueAuthors() {
+		let total;
+		let uniqueAuthors = [];
+		let books = this.books;
+
+		for (let i = 0; i < books.length; i++) {
+			if (!uniqueAuthors.includes(books[i].author)) {
+				uniqueAuthors.push(books[i].author);
+			}
+			total = uniqueAuthors.length;
+		}
+		if (total > 0) return total; else return 0;
+	}
+
+	getTotalReadBooks() {
+		let total = 0;
+
+		library.books.forEach(book => console.log(book.isRead));
+
+		for (let i = 0; i < library.books.length; i++) {
+			if (library.books[i].isRead = true) {
+				total++;
+			}
+		}
 		return total; 
 	}
 
@@ -172,7 +199,6 @@ const deleteBook = (e) => {
 	library.removeBook(title);
 	updateLibrary();
 	updateStats();
-
 };
 
 const toggleStatus = (e) => {
@@ -182,6 +208,8 @@ const toggleStatus = (e) => {
 
 	book.isRead = !book.isRead;
 	updateLibrary();
+
+	library.books.forEach(book => console.log(`${book.title} ` + book.isRead));
 };
 
 //Add individual book to library, add book modal
@@ -210,7 +238,6 @@ const addBookToLibrary = (e) => {
 
 	return;
 };
-
 
 const deleteSelectedBooks = (e) => {
 	let rows = Array.from(tbody.rows);
@@ -277,7 +304,6 @@ const populateLibrary = () => {
 	updateLibrary();
 };
 
-populateLibrary();
 
 
 //Library statistics
@@ -292,9 +318,11 @@ const deletedBooksTotal = document.querySelector('.deleted-books');
 const updateStats = () => {
 	totalBooks.value = library.getTotalBooks();
 	totalPages.value = library.getTotalPagesRead();
-}
+	uniqueAuthors.value = library.getTotalUniqueAuthors();
+	readBooksTotal.value = library.getTotalReadBooks();
+};
 
-updateStats();
+
 
 //Event Listeners
 addBookBtn.addEventListener('click', openAddBookModal);
@@ -310,4 +338,5 @@ deleteSelectedBooksBtn.addEventListener('click', deleteSelectedBooks);
 addBookForm.addEventListener('submit', addBookToLibrary);
 window.onkeydown = escapeModal;
 
-
+populateLibrary();
+updateStats();
