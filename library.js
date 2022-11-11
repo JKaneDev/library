@@ -4,6 +4,7 @@ class Book {
 		author = 'Unknown',
 		pages = '0',
 		published = 'Unknown',
+		acquired = 'Unknown',
 		isRead = false
 	) {
 		this.title = title;
@@ -94,6 +95,7 @@ class Library {
 		let book = this.getBook(title);
 		this.deletedBooks.push(book);
 	}
+
 
 	sortLibrary(e, property) {
 		library.books.sort((a, b) => (a[property] > b[property] ? 1 : -1));
@@ -214,10 +216,8 @@ const createRow = (book) => {
 
 	if (book.isRead) {
 		toggleStatusBtn.textContent = 'Read';
-		toggleStatusBtn.classList.add('btn-read-color');
 	} else {
 		toggleStatusBtn.textContent = 'Unread';
-		toggleStatusBtn.classList.add('btn-unread-color');
 	}
 
 	checkboxCell.appendChild(checkbox);
@@ -255,7 +255,10 @@ const getBookFromModalInput = () => {
 	const pages = document.getElementById('pages').value;
 	const published = document.getElementById('published').value;
 	const acquired = document.getElementById('acquired').value;
-	const isRead = document.getElementById('status').value;
+	let isRead = document.getElementById('read-status').value;
+
+	if (isRead === 'Read') isRead = true;
+	else if (isRead === 'Unread') isRead = false;
 
 	return new Book(title, author, pages, published, acquired, isRead);
 };
@@ -266,6 +269,8 @@ const addBookToLibrary = (e) => {
 	const newBook = getBookFromModalInput();
 
 	library.addBook(newBook);
+
+	console.table(library.books);
 
 	updateLibrary();
 

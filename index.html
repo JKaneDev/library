@@ -170,17 +170,17 @@
                     </li>
                     <li>
                         <label for="published">Published:</label>
-                        <input type="date" name="published" id="published">
+                        <input type="date" name="published" placeholder="yyyy/dd/mm" id="published">
                     </li>
                     <li>
                         <label for="acquired">Acquired:</label>
-                        <input type="date" name="acquired" placeholder="dd/mm/yyyy" id="acquired">
+                        <input type="date" name="acquired" placeholder="yyyy/dd/mm" id="acquired">
                     </li>
                     <li>
                         <label for="status">Status</label>
-                        <select name="status" id="read-status" id="status">
-                            <option value="Read" selected>Read</option>
-                            <option value="Unread">Unread</option>
+                        <select name="status" id="read-status">
+                            <option value="Read" selected value="true">Read</option>
+                            <option value="Unread" value="">Unread</option>
                         </select>
                     </li>
                     <button id="submit-book">Add Book</button>
