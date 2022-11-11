@@ -126,6 +126,8 @@ const library = new Library();
 //Building library table
 
 const container = document.querySelector('.container');
+const gitHub = document.getElementById('github-svg');
+const refresh = document.getElementById('refresh-svg');
 const table = document.querySelector('.books');
 const selectAll = document.querySelector('.select-all');
 const theadTitle = document.getElementById('sort-by-title');
@@ -141,6 +143,14 @@ const addBookBtn = document.getElementById('add-book');
 const deleteSelectedBooksBtn = document.getElementById('delete-selected');
 const addBookToLibraryBtn = document.getElementById('submit-book');
 const exitModalBtn = document.getElementById('exit-modal');
+
+const reloadPage = () => {
+	window.location.reload();
+}
+
+const openRepo = (e) => {
+	window.location.href = 'https://github.com/JamesKane00/library';
+}
 
 const openAddBookModal = (e) => {
 	addBookForm.reset();
@@ -220,7 +230,7 @@ const deleteBook = (e) => {
 	const title =
 		e.target.parentNode.parentNode.parentNode.firstChild.nextSibling.innerText;
 
-	pushToDeleted(title);
+	library.pushToDeleted(title);
 	library.removeBook(title);
 
 	updateLibrary();
@@ -349,6 +359,8 @@ const updateStats = () => {
 };
 
 //Event Listeners
+refresh.addEventListener('click', reloadPage);
+gitHub.addEventListener('click', openRepo)
 addBookBtn.addEventListener('click', openAddBookModal);
 exitModalBtn.addEventListener('click', closeAddBookModal);
 selectAll.addEventListener('click', selectAllBooks);
