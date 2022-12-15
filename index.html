@@ -154,27 +154,27 @@
         <img src="img/exit.svg" id="exit-modal" alt="Exit SVG">
         <h2>Add New Book</h2>
 
-            <form action="submit" id="add-book-to-library">
+            <form novalidate action="submit" id="add-book-to-library">
                 <ul>
                     <li>
                         <label for="title">Title:</label>
-                        <input type="text" name="title" id="title">
+                        <input type="text" name="title" id="title" pattern="^[a-zA-Z]+$" required>
                     </li>
                     <li>
                         <label for="author">Author:</label>
-                        <input type="text" name="author" id="author">
+                        <input type="text" name="author" id="author" pattern="^[a-zA-Z]+$" required>
                     </li>
                     <li>
                         <label for="pages">Pages:</label>
-                        <input type="text" name="pages" id="pages">
+                        <input type="number" name="pages" id="pages" min="1" max="1500" pattern="/^\d{1,4}$/" required>
                     </li>
                     <li>
                         <label for="published">Published:</label>
-                        <input type="date" name="published" placeholder="yyyy/dd/mm" id="published">
+                        <input type="date" name="published" required placeholder="yyyy/dd/mm" pattern="^\d{1,2}\/\d{1,2}\/\d{1,4}$" id="published">
                     </li>
                     <li>
                         <label for="acquired">Acquired:</label>
-                        <input type="date" name="acquired" placeholder="yyyy/dd/mm" id="acquired">
+                        <input type="date" name="acquired" required placeholder="yyyy/dd/mm" pattern="^\d{1,2}\/\d{1,2}\/\d{1,4}$" id="acquired">
                     </li>
                     <li>
                         <label for="status">Status</label>
