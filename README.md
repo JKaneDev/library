@@ -24,7 +24,3 @@ Odin Project Objectives:
     - Statistics display that shows total number of books, unique authors, pages read, read books, unread books and deleted books.
 
     - Delete function that allows user to delete multiple books at once by selecting with checkbox, or selecting all books with one checkbox. 
-
-
-
-

@@ -59,7 +59,8 @@ class Library {
 			}
 			total = uniqueAuthors.length;
 		}
-		if (total > 0) return total; else return 0;
+		if (total > 0) return total;
+		else return 0;
 	}
 
 	getTotalReadBooks() {
@@ -71,7 +72,7 @@ class Library {
 				total++;
 			}
 		}
-		return total; 
+		return total;
 	}
 
 	getTotalUnreadBooks() {
@@ -83,7 +84,7 @@ class Library {
 				total++;
 			}
 		}
-		return total; 
+		return total;
 	}
 
 	getTotalDeletedBooks() {
@@ -95,7 +96,6 @@ class Library {
 		let book = this.getBook(title);
 		this.deletedBooks.push(book);
 	}
-
 
 	sortLibrary(e, property) {
 		library.books.sort((a, b) => (a[property] > b[property] ? 1 : -1));
@@ -120,7 +120,6 @@ class Library {
 
 		updateLibrary();
 	}
-
 }
 
 const library = new Library();
@@ -148,11 +147,11 @@ const exitModalBtn = document.getElementById('exit-modal');
 
 const reloadPage = () => {
 	window.location.reload();
-}
+};
 
 const openRepo = (e) => {
 	window.location.href = 'https://github.com/JamesKane00/library';
-}
+};
 
 const openAddBookModal = (e) => {
 	addBookForm.reset();
@@ -160,6 +159,7 @@ const openAddBookModal = (e) => {
 	addBookModal.style.display = 'block';
 	container.style.opacity = '0.5';
 };
+
 
 const closeAddBookModal = () => {
 	addBookForm.classList.remove('active');
@@ -247,8 +247,6 @@ const toggleStatus = (e) => {
 	updateStats();
 };
 
-//Add individual book to library, add book modal
-
 const getBookFromModalInput = () => {
 	const title = document.getElementById('title').value;
 	const author = document.getElementById('author').value;
@@ -263,21 +261,105 @@ const getBookFromModalInput = () => {
 	return new Book(title, author, pages, published, acquired, isRead);
 };
 
+
 const addBookToLibrary = (e) => {
+	// Prevent the form from being submitted
 	e.preventDefault();
-
+  
+	// Check if the form is valid
+	const form = document.getElementById('add-book-to-library');
+	if (!isValidForm()) {
+	  return;
+	}
+  
+	// If the form is valid, get the book from the input fields
 	const newBook = getBookFromModalInput();
-
+  
+	// Add the book to the library and update the library
 	library.addBook(newBook);
-
-	console.table(library.books);
-
 	updateLibrary();
-
+  
+	// Close the add book modal
 	closeAddBookModal();
+  };
+  
+  const isValidForm = () => {
+	// Get all input fields in the form
+	const form = document.getElementById('add-book-to-library');
+	const inputFields = form.querySelectorAll('input');
+  
+	// Check if any of the input fields are empty
+	let isValid = true;
+	inputFields.forEach((field) => {
+	  if (field.validity.valueMissing) {
+		field.setCustomValidity('Please Ensure This Field Is Filled In');
+		form.reportValidity();
+		isValid = false;
+	  } else {
+		field.setCustomValidity('');
+	  }
+	});
+  
+	if (!isValid) {
+	  return false;
+	}
+  
+	// Check if the title and author fields contain only text
+	const title = document.getElementById('title');
+	title.addEventListener('input', function() {
+		if (title.validity.typeMismatch) {
+			title.setCustomValidity('Only Alphabetical Text Can Be Entered Into This Field');
+			title.reportValidity();
+		} else {
+			title.setCustomValidity('');
+		}
+	});
+	
+	const author = document.getElementById('author');
+	  author.addEventListener('input', function() {
+		if (author.validity.typeMismatch) {
+		  author.setCustomValidity('Only Alphabetical Text Can Be Entered Into This Field');
+		  author.reportValidity();
+		} else {
+		  author.setCustomValidity('');
+		}
+	  });
+	  
 
-	return;
-};
+	  const pages = document.getElementById('pages');
+	  pages.addEventListener('input', function() {
+		if (pages.validity.patternMismatch) {
+		  pages.setCustomValidity('Only Numerical Characters Can Be Entered Into This Field');
+		  pages.reportValidity();
+		} else {
+		  pages.setCustomValidity('');
+		}
+	  });
+	  
+	
+  
+	// Check if the published and acquired fields contain valid dates
+	const published = document.getElementById('published');
+	published.addEventListener('input', function() {
+		if (published.validity.patternMismatch) {
+			published.setCustomValidity("Please Ensure A Correctly Formatted Date Is Entered Into This Field. E.g. 'DD/MM/YYYY'");
+			published.reportValidity();
+		} else {
+			published.setCustomValidity('');
+		}
+	});
+	
+	const acquired = document.getElementById('acquired');
+	  acquired.addEventListener('input', function() {
+		if (acquired.validity.patternMismatch) {
+		  acquired.setCustomValidity("Please Ensure A Correctly Formatted Date Is Entered Into This Field. E.g. 'DD/MM/YYYY'");
+		  acquired.reportValidity();
+		} else {
+		  acquired.setCustomValidity('');
+		}
+	  });
+	return true;
+}
 
 const deleteSelectedBooks = (e) => {
 	let rows = Array.from(tbody.rows);
@@ -365,7 +447,7 @@ const updateStats = () => {
 
 //Event Listeners
 refresh.addEventListener('click', reloadPage);
-gitHub.addEventListener('click', openRepo)
+gitHub.addEventListener('click', openRepo);
 addBookBtn.addEventListener('click', openAddBookModal);
 exitModalBtn.addEventListener('click', closeAddBookModal);
 selectAll.addEventListener('click', selectAllBooks);
